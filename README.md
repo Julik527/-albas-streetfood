@@ -4,7 +4,7 @@ Professionelle, mehrsprachige Website für **Alba’s Streetfood** in Leutkirch 
 
 ## Veröffentlichung
 
-Die Website wird automatisch über GitHub Pages geprüft und veröffentlicht, sobald die Datei `site-package.tar.gz` im Hauptverzeichnis ersetzt wird.
+Die Website wird automatisch über GitHub Pages geprüft und veröffentlicht, sobald die Datei `site-package-firstclass7-real-offers.tar.gz` im Hauptverzeichnis hochgeladen wird.
 
 Vorgesehene Vorschauadresse:
 
@@ -12,29 +12,31 @@ Vorgesehene Vorschauadresse:
 
 Für eine saubere endgültige Adresse sollte das Repository später in `albas-streetfood` umbenannt werden.
 
-## First-Class-Fassung
+## First Class 7
 
-- echtes, textfreies Foodtruck-Titelbild ohne Story-Text oder veraltete Kontaktdaten
-- ruhige Startseite ohne unnötiges Karussell
+- echtes, textfreies Foodtruck-Titelbild
+- ruhige Startseite ohne automatisches Karussell
+- fünf professionell optimierte Originalfotos der Aktionskarten vom 26.07.2026
+- zeitgesteuerte Aktionsbilder auf Startseite und Galerie
+- Angebote für 5, 7 und 10 Cevapcici, Cevapcici-Burger und Wellenschnitt-Pommes
 - Speisekartenfilter und unverbindlicher Preisrechner
 - kompakter Besuchsplaner mit Datum, Uhrzeit, Route und Kalenderexport
 - sofort sichtbare Satellitenkarte mit Straßenkarten-Fallback
 - vollständig lokale Kartensteuerung ohne Leaflet oder externe JavaScript-Bibliothek
-- Deutsch, Englisch und Albanisch
+- Deutsch, Englisch und Kosovo-Albanisch
 - responsive Bedienung für Smartphone, Tablet und Desktop
-- klare Kennzeichnung verbliebener KI-Speisenvisualisierungen
-- kein Service Worker und kein PWA-Cache, damit Aktualisierungen zuverlässig erscheinen
-- automatische Struktur-, Übersetzungs-, Karten- und Abschlussprüfung
+- kein aktiver Service Worker und kein PWA-Cache
+- automatische Struktur-, Übersetzungs-, Karten-, Bild- und Abschlussprüfung
 
-## First-Class-Paket einspielen
+## First-Class-7-Paket einspielen
 
-1. Die neue Datei `site-package.tar.gz` herunterladen.
-2. Im Repository die bestehende Datei `site-package.tar.gz` öffnen.
-3. Über das Drei-Punkte-Menü `Replace file` beziehungsweise `Upload files` wählen.
-4. Die neue Datei unter exakt demselben Namen hochladen.
-5. Direkt auf `main` committen.
+1. Die Datei `site-package-firstclass7-real-offers.tar.gz` herunterladen.
+2. Im Repository `Add file` und anschließend `Upload files` wählen.
+3. Die Datei unverändert und ohne Umbenennen hochladen.
+4. Direkt auf `main` committen.
+5. Unter `Actions` den neuen Lauf bis zur grünen Veröffentlichung abwarten.
 
-Der GitHub-Actions-Workflow startet anschließend automatisch.
+Der Workflow kontrolliert neben der Versionskennung auch, ob alle fünf neuen Aktionsbilder tatsächlich im Paket enthalten sind.
 
 ## Veröffentlichungsstatus
 
