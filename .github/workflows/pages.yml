@@ -1,0 +1,82 @@
+name: Alba’s Streetfood auf GitHub Pages veröffentlichen
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "site-package.tar.gz"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  validate-and-deploy:
+    name: Prüfen und veröffentlichen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v6
+
+      - name: Website-Paket prüfen
+        shell: bash
+        run: |
+          test -f site-package.tar.gz
+          test -s site-package.tar.gz
+          tar -tzf site-package.tar.gz >/dev/null
+
+      - name: Website entpacken
+        shell: bash
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          tar -xzf site-package.tar.gz -C _site
+          test -f _site/index.html
+          touch _site/.nojekyll
+
+      - name: Geschäftsdaten synchronisieren
+        working-directory: _site
+        run: node scripts/sync-business.mjs
+
+      - name: Seitenstruktur prüfen
+        working-directory: _site
+        run: node scripts/audit-site.mjs
+
+      - name: Satellitenkarte prüfen
+        working-directory: _site
+        run: node scripts/audit-map.mjs
+
+      - name: HTML, CSS und JavaScript prüfen
+        working-directory: _site
+        run: node scripts/audit-harmony.mjs
+
+      - name: Technische Abschlussprüfung
+        working-directory: _site
+        run: node scripts/audit-final.mjs
+
+      - name: Offene Unternehmensangaben protokollieren
+        working-directory: _site
+        run: node scripts/validate-release.mjs
+
+      - name: GitHub Pages vorbereiten
+        uses: actions/configure-pages@v5
+
+      - name: Website-Artefakt hochladen
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "_site"
+
+      - name: Website veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v4
