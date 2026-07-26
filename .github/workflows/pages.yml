@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "site-package.tar.gz"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -20,6 +21,7 @@ jobs:
   validate-and-deploy:
     name: Prüfen und veröffentlichen
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -31,6 +33,7 @@ jobs:
       - name: Website-Paket prüfen
         shell: bash
         run: |
+          set -euo pipefail
           test -f site-package.tar.gz
           test -s site-package.tar.gz
           tar -tzf site-package.tar.gz >/dev/null
@@ -38,6 +41,7 @@ jobs:
       - name: Website entpacken
         shell: bash
         run: |
+          set -euo pipefail
           rm -rf _site
           mkdir -p _site
           tar -xzf site-package.tar.gz -C _site
