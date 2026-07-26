@@ -72,8 +72,10 @@ jobs:
         working-directory: _site
         run: node scripts/validate-release.mjs
 
-      - name: GitHub Pages vorbereiten
+      - name: GitHub Pages aktivieren und vorbereiten
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Website-Artefakt hochladen
         uses: actions/upload-pages-artifact@v4
