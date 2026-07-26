@@ -4,8 +4,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "site-package.tar.gz"
-      - ".github/workflows/pages.yml"
+      - "site-package-firstclass6-story.tar.gz"
   workflow_dispatch:
 
 permissions:
@@ -30,13 +29,13 @@ jobs:
       - name: Repository laden
         uses: actions/checkout@v6
 
-      - name: Website-Paket prüfen
+      - name: First-Class-Website-Paket prüfen
         shell: bash
         run: |
           set -euo pipefail
-          test -f site-package.tar.gz
-          test -s site-package.tar.gz
-          tar -tzf site-package.tar.gz >/dev/null
+          test -f site-package-firstclass6-story.tar.gz
+          test -s site-package-firstclass6-story.tar.gz
+          tar -tzf site-package-firstclass6-story.tar.gz >/dev/null
 
       - name: Website entpacken
         shell: bash
@@ -44,8 +43,9 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site
-          tar -xzf site-package.tar.gz -C _site
+          tar -xzf site-package-firstclass6-story.tar.gz -C _site
           test -f _site/index.html
+          grep -q '20260726-firstclass6-story' _site/index.html
           touch _site/.nojekyll
 
       - name: Geschäftsdaten synchronisieren
