@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "site-package-firstclass6-story.tar.gz"
+      - "site-package-firstclass7-real-offers.tar.gz"
   workflow_dispatch:
 
 permissions:
@@ -33,9 +33,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f site-package-firstclass6-story.tar.gz
-          test -s site-package-firstclass6-story.tar.gz
-          tar -tzf site-package-firstclass6-story.tar.gz >/dev/null
+          test -f site-package-firstclass7-real-offers.tar.gz
+          test -s site-package-firstclass7-real-offers.tar.gz
+          tar -tzf site-package-firstclass7-real-offers.tar.gz >/dev/null
 
       - name: Website entpacken
         shell: bash
@@ -43,9 +43,14 @@ jobs:
           set -euo pipefail
           rm -rf _site
           mkdir -p _site
-          tar -xzf site-package-firstclass6-story.tar.gz -C _site
+          tar -xzf site-package-firstclass7-real-offers.tar.gz -C _site
           test -f _site/index.html
-          grep -q '20260726-firstclass6-story' _site/index.html
+          grep -q '20260726-firstclass7-real-offers' _site/index.html
+          test -f _site/assets/images/offer-cevapcici-10-900.webp
+          test -f _site/assets/images/offer-cevapcici-7-900.webp
+          test -f _site/assets/images/offer-cevapcici-5-900.webp
+          test -f _site/assets/images/offer-cevapcici-burger-900.webp
+          test -f _site/assets/images/offer-wellenschnitt-pommes-900.webp
           touch _site/.nojekyll
 
       - name: Geschäftsdaten synchronisieren
